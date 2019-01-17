@@ -21,7 +21,6 @@ int main(void)
 		tempA = PINA & 0x0F;
 		cntavail = ((tempA >> 3) & 0x01) + ((tempA >> 2) & 0x01) + ((tempA >> 1) & 0x01) + ((tempA) & 0x01);
 		cntavail = 0x04 - cntavail;
-
 		PORTC = cntavail;
 	}
 }
