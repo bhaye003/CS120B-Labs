@@ -18,16 +18,17 @@ unsigned char GetBit(unsigned char x, unsigned char k) {
 
 int main(void)
 {
-	DDRD = 0x00; PORTD = 0x00;
-	DDRB = 0x00; PORTB = 0x00;
+	DDRD = 0x00; PORTD = 0xFF;
+	DDRB = 0xFE; PORTB = 0x01;
 	
-	unsigned short total;
-	unsigned char tempB = 0xFF;
-	unsigned char tempD = 0xFF;
+	unsigned short total = 0x0000;
+	unsigned char tempB = 0x00;
+	unsigned char tempD = 0x00;
 	
     /* Replace with your application code */
     while (1) 
     {
+		total = 0x0000;
 		tempB = PINB;
 		tempD = PIND;
 		
@@ -37,9 +38,14 @@ int main(void)
 		
 		if(total >= 0x46){
 			tempB = SetBit(tempB, 1, 1);
+			tempB = SetBit(tempB, 2, 0);
 		}
 		else if(total >= 0x05){
-			tempB = SetBit(PORTB, 2, 1);
+			tempB = SetBit(tempB, 2, 1);
+			tempB = SetBit(tempB, 1, 0);
+		}
+		else{
+			tempB = 0x00;
 		}
 		PORTB = tempB;
 		
